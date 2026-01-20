@@ -53,7 +53,7 @@ static int stereoView = FALSE;
 static int skyColourScheme = SCS_COLOUR;    /* Colour scheme */
 static double stereoOcular = 6;       /* Ocular separation - cross, + wall */
 #define stereoSepPixels 10
-static int useimage = FALSE;          /* Use images for planets ? */
+static int useimage = TRUE;           /* Use images for planets ? (default) */
 #ifdef SAVESET
 static int bookmark = FALSE;          /* Save parameters for bookmark ? */
 static int gotten = FALSE;            /* Was "get" method used ? */
@@ -1117,7 +1117,7 @@ int main(int argc, char **argv)
     double vlat, vlon, valt,
            tlat = 0, tlon = 0, talt = 35785;
     int i, f = 0,
-        tmsize = 320, wppm = FALSE, trackelem = FALSE, html = FALSE,
+        tmsize = 1024, wppm = FALSE, trackelem = FALSE, html = FALSE,
         innersystem = FALSE, orbittype = 0, endopts = FALSE,
         dynimg = FALSE, stateless = FALSE;
     char *di, *cp, opt, *cachep;
