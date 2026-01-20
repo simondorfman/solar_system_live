@@ -7,7 +7,13 @@ CC	= gcc
 
 OBJS = vplanet.o astro.o gifout.o orbits.o vsop87.o \
 	   planetp.o pluto.o asteroid.o astrelem.o cometel.o sglib.o \
-	   csvelements.o jplelements.o htmlutil.o uncgi.o strlcpy.o
+	   csvelements.o jplelements.o htmlutil.o uncgi.o
+
+# macOS provides strlcpy(3) in libc; compiling our fallback causes conflicts.
+UNAME_S := $(shell uname -s)
+ifneq ($(UNAME_S),Darwin)
+OBJS += strlcpy.o
+endif
 
 #	Build test version with public host key
 solar:	$(OBJS) packargs_PUB.o

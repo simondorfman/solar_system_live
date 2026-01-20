@@ -25,4 +25,12 @@ without modification in other environments.
 as a Common Gateway Interface (CGI) application invoked by a Web
 server processing a user request.
 
+## macOS + Lighttpd quick start (local)
+
+If you have Lighttpd installed (e.g. via Homebrew) and want a local instance
+equivalent to the production `/cgi-bin/Solar` endpoint (example:
+`https://www.fourmilab.ch/cgi-bin/Solar`), see:
+
+- `scripts/README-macos-lighttpd.md`
+
 ![Solar System Live: Halley's Comet](src/regress/expected/solar1.gif)

@@ -216,4 +216,6 @@ extern void trackAsteroid(double jd, double *ra, double *dec, double *dist,
 
 /* From strlcpy.c */
 
+#if !defined(__APPLE__)
 size_t strlcpy(char *dst, const char *src, size_t siz);
+#endif

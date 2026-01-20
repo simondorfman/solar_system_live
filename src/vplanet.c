@@ -180,10 +180,11 @@ static void dump_ppm(const char *fname, const struct bmih *bi, const unsigned ch
 
 static double parseDeg(const char *dec)
 {
+    /* Accept DMS notations like 47d30' or 47 30 00.  Avoid non-ASCII
+       degree symbols here to keep builds portable across toolchains/encodings. */
     if ((strchr(dec, 'd') != NULL) ||
         (strchr(dec, 'D') != NULL) ||
-        (strchr(dec, ' ') != NULL) ||
-        (strchr(dec, '°') != NULL)) {
+        (strchr(dec, ' ') != NULL)) {
         double dd = 0, mm = 0, ss = 0;
         char c1, c2;
 
@@ -945,7 +946,7 @@ static void writepost(FILE *fp, const double vlat, const double vlon, const doub
     }
 
 #define W(x)    fprintf(fp, "%s\n", x)
-#define L(x, y)    fprintf(fp, "<a href=\"/solar/help/%s.html\"><b>%s:</b></a>", y, x);
+#define L(x, y)    fprintf(fp, "<a href=\"/help/%s.html\"><b>%s:</b></a>", y, x);
 #ifdef TESTMODE
     /* We always use the "get" method in TESTMODE so that the arguments are visible
        and can be edited for debugging. */
@@ -965,13 +966,13 @@ static void writepost(FILE *fp, const double vlat, const double vlon, const doub
 
                               L("Time", "timedate");
 
-    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"0\"%s />&nbsp;<a href=\"/solar/help/timedate.html#Now\">Now</a>\n",
+    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"0\"%s />&nbsp;<a href=\"/help/timedate.html#Now\">Now</a>\n",
         dto == 0 ? checked : "");
-    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"1\"%s />&nbsp;<a href=\"/solar/help/timedate.html#UTC\">UTC:</a>&nbsp;",
+    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"1\"%s />&nbsp;<a href=\"/help/timedate.html#UTC\">UTC:</a>&nbsp;",
         dto == 1 ? checked : "");
     fprintf(fp, "<input type=\"text\" name=\"utc\" value=\"%s\" size=\"20\" onchange=\"document.request.date[1].checked=true;\" />\n",
         dtutc);
-    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"2\"%s />&nbsp;<a href=\"/solar/help/timedate.html#Julian\">Julian:</a>&nbsp;",
+    fprintf(fp, "<input type=\"radio\" name=\"date\" onclick=\"0\" value=\"2\"%s />&nbsp;<a href=\"/help/timedate.html#Julian\">Julian:</a>&nbsp;",
         dto == 2 ? checked : "");
     fprintf(fp, "<input type=\"text\" name=\"jd\" value=\"%.5f\" size=\"15\" onchange=\"document.request.date[2].checked=true;\" />\n",
         jt);
@@ -980,7 +981,7 @@ static void writepost(FILE *fp, const double vlat, const double vlon, const doub
 #ifdef SAVESET
     fprintf(fp, "  <input type=\"checkbox\" name=\"bmark\" value=\"-xs\"%s /> ",
         (bookmark && !gotten) ? "checked" : "");
-    fprintf(fp, "<a href=\"/solar/help/saveset.html\"><b>Save settings</b></a>");
+    fprintf(fp, "<a href=\"/help/saveset.html\"><b>Save settings</b></a>");
 #endif
     W( "<input type=\"submit\" value=\"Update\" />");
     W("<br />");
