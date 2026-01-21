@@ -10,7 +10,9 @@ Perfect for creating unique birthday videos! Generate time-lapse animations show
 
 Here's a sample video generated using Einstein's birth and death dates (1879-03-14 to 1955-04-18):
 
-<video src="docs/einstein-timelapse-example.mp4" controls width="100%"></video>
+[![Einstein Solar System Timelapse](docs/einstein-timelapse-thumbnail.gif)](docs/einstein-timelapse-example.mp4)
+
+*(Click the animated GIF above to view the full video)*
 
 ## Quick Start
 
